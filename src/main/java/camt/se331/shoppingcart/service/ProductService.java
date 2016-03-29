@@ -1,5 +1,6 @@
 package camt.se331.shoppingcart.service;
 
+import camt.se331.shoppingcart.entity.Image;
 import camt.se331.shoppingcart.entity.Product;
 
 import java.util.List;
@@ -14,4 +15,5 @@ public interface ProductService {
     Product deleteProduct(Long id);
     Product updateProduct(Product product);
     List<Product> getProductsByName(String name);
+    Product addImage(Product product, Image image);
 }

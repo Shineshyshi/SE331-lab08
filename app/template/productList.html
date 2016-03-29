@@ -1,4 +1,3 @@
-
 <div class="alert alert-success alert-dismissible" role="alert" ng-show="addSuccess">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span></button>
@@ -18,9 +17,9 @@
     <!-- Default panel contents -->
     <div class="panel-heading">Products</div>
     <div class="panel-body">
-        <div class="col-lg-4" >
+        <div class="col-lg-4">
         </div>
-        <div class="col-lg-6" >
+        <div class="col-lg-6">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="name..." ng-model="name"/>
                 <span class="input-group-btn">
@@ -36,10 +35,11 @@
     <table class="table table-hover">
         <tr>
             <th>#</th>
-            <th translate>listProduct.name </th>
+            <th translate>listProduct.name</th>
             <th translate>listProduct.description</th>
             <th class="text-right" translate>listProduct.netPrice</th>
             <th class="text-right" translate>listProduct.price</th>
+            <th class="text-center" translate>listProduct.picture</th>
             <th translate>listProduct.edit</th>
             <th translate>listProduct.delete</th>
 
@@ -50,12 +50,22 @@
             <td>{{product.description}}</td>
             <td class="text-right">{{product.netPrice | number}}</td>
             <td class="text-right">{{product.totalPrice | number}}</td>
-            <td class="text-center"><a ng-href="#/editProduct/{{product.id}}"> <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a></td>
-            <td class="text-center"><a ng-href="#/listProduct"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true" ng-click="deleteProduct(product.id)"></span></a></td>
+            <td>
+                <div ng-repeat="image in product.images" class="text-center">
+                    <img ng-src="data:{{image.contentType}};base64,{{image.content}}" class="thumbnail">
+                </div>
+            </td>
+
+            <td class="text-center"><a ng-href="#/editProduct/{{product.id}}"> <span class="glyphicon glyphicon-edit"
+                                                                                     aria-hidden="true"></span></a></td>
+            <td class="text-center"><a ng-href="#/listProduct"><span class="glyphicon glyphicon-remove-circle"
+                                                                     aria-hidden="true"
+                                                                     ng-click="deleteProduct(product.id)"></span></a>
+            </td>
         </tr>
         <tr>
             <th></th>
-            <th><strong translate>listProduct.total</strong> </th>
+            <th><strong translate>listProduct.total</strong></th>
             <th></th>
             <th class="text-right">{{totalNetPrice | number}}</th>
             <th></th>

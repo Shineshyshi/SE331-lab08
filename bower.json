@@ -15,7 +15,8 @@
     "html5-boilerplate": "~4.3.0",
     "bootstrap": "3.3.x",
     "angular-translate":"2.6.x",
-    "angular-translate-loader-url":"2.6.x"
+    "angular-translate-loader-url":"2.6.x",
+    "ng-flow":"~2"
   }
 }
 

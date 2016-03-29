@@ -1,21 +1,37 @@
 package camt.se331.shoppingcart.entity;
 
+import org.hibernate.annotations.*;
+
+
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.util.HashSet;
+import java.util.Set;
+
 
 /**
  * Created by Dto on 2/7/2015.
  */
 @Entity
-public class Product implements Comparable{
+public class Product implements Comparable {
     @Id
     @GeneratedValue
     Long id;
     String name;
     String description;
     Double totalPrice;
+    @OneToMany(fetch = FetchType.EAGER)
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    Set<Image> images = new HashSet<>();
 
+
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
+    }
 
     public Long getId() {
         return id;
@@ -25,17 +41,15 @@ public class Product implements Comparable{
         this.id = id;
     }
 
-    public Product(){
 
-    };
-
-    public Double getNetPrice(){
-        return getTotalPrice()*(1-VatEntity.getInstance().getVat());
+    public Double getNetPrice() {
+        return getTotalPrice() * (1 - VatEntity.getInstance().getVat());
     }
 
-    public Double getTax(){
+    public Double getTax() {
         return 0.0;
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -60,11 +74,22 @@ public class Product implements Comparable{
         return result;
     }
 
-    public Product(Long id,String name, String description, Double price) {
+    public Product(Long id, String name, String description, Double price, Image image) {
         this.name = name;
         this.description = description;
         this.totalPrice = price;
         this.id = id;
+        this.images.add(image);
+    }
+
+    public Product(Long id, String name, String description, Double price) {
+        this.name = name;
+        this.description = description;
+        this.totalPrice = price;
+        this.id = id;
+    }
+
+    public Product() {
     }
 
     public String getName() {
@@ -94,6 +119,6 @@ public class Product implements Comparable{
     @Override
     public int compareTo(Object o) {
 
-        return (int) (this.getId() - ((Product)o).getId());
+        return (int) (this.getId() - ((Product) o).getId());
     }
 }

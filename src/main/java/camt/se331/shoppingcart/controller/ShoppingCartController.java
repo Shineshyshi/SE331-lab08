@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Created by Dto on 4/6/2015.
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/shoppingcart")
 public class ShoppingCartController {

@@ -6,6 +6,7 @@ import camt.se331.shoppingcart.entity.SelectedProduct;
 import camt.se331.shoppingcart.entity.ShoppingCart;
 import camt.se331.shoppingcart.repository.ProductRepository;
 import camt.se331.shoppingcart.repository.ShoppingCartRepository;
+import camt.se331.shoppingcart.service.ImageUtil;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
@@ -26,7 +27,7 @@ public class DatabaseInitializationBean implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         Product[] initProduct =  {
-                new Product(1l,"Kindle","the good book reader",6900.00),
+                new Product(1l,"Kindle","the good book reader",6900.00,ImageUtil.getImage("pic/ss.png")),
                 new Product(2l,"Surface Pro","The unknow computer",34000.00),
                 new Product(3l,"Mac pro"," Mac book interim",44000.00),
                 new Product(4l,"Candle","use for lightenup the world",10.00),
