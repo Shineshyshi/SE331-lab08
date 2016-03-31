@@ -24,9 +24,11 @@ public class ImageUtil {
 
     public static Image getImage(String resourcePath) {
         Image image = new Image();
-        ClassLoader classLoader = ImageUtil.getInstance().getClass().getClassLoader();
+        ClassLoader classLoader =
+                ImageUtil.getInstance().getClass().getClassLoader();
 
-        File file = new File(classLoader.getResource(resourcePath).getFile());
+        File file = new
+                File(classLoader.getResource(resourcePath).getFile());
 
         try {
             image.setFileName(file.getName());
@@ -43,5 +45,7 @@ public class ImageUtil {
             e.printStackTrace();
         }
         return image;
+
     }
+
 }

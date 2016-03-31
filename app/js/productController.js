@@ -16,14 +16,10 @@ productMainController.controller('addProductController', ['$scope', '$http', '$l
                 flowFiles.upload();
 
             });
-
             $rootScope.addSuccess = true;
             $location.path("listProduct");
             $scope.$apply();
-
         };
-
-
     }]);
 
 productMainController.controller('listProductController', ['$scope', '$http', '$rootScope', 'productService', '$route', 'totalCalService', 'queryProductService',
