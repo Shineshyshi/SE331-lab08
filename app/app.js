@@ -46,10 +46,10 @@ labApp.config(['flowFactoryProvider', function (flowFactoryProvider) {
             console.log('catchAll', arguments);
         })
     }])
-.config([
+    .config([
         '$compileProvider',
         function ($compileProvider) {
-            $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
+            $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|chrome-extension):/);
             $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|local|data):/);
         }
     ]);
