@@ -11,9 +11,6 @@ public class Image {
     @Id
     @GeneratedValue
     private Long id;
-    public Image(){
-
-    }
 
     String fileName;
     @Lob
@@ -22,6 +19,8 @@ public class Image {
 
     @Temporal(TemporalType.TIME)
     Date created;
+    public Image(){
+    }
 
     public Date getCreated() {
         return created;

@@ -34,22 +34,22 @@ labApp.config(function ($translateProvider) {
     $translateProvider.fallbackLanguage('en');
 });
 labApp.config(['flowFactoryProvider', function (flowFactoryProvider) {
-    flowFactoryProvider.defaults = {
-        target: '',
-        permanentErrors: [500, 501],
-        maxChunkRetries: 1,
-        chunkRetryInterval: 5000,
-        simultaneousUploads: 4,
-        singleFile: false
-    };
-    flowFactoryProvider.on('catchAll', function (event) {
-        console.log('catchAll', arguments);
-    })
-}]);
-
-labApp.config(['$compileProvider',
-    function ($compileProvider) {
-        $compileProvider.aHrefSanitizationWhitelist( / ^\s * (https ? | ftp | mailto | file | chrome - extension):/) ;
-        $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|local|data):/);
-    }
-]);
+        flowFactoryProvider.defaults = {
+            target: '',
+            permanentErrors: [500, 501],
+            maxChunkRetries: 1,
+            chunkRetryInterval: 5000,
+            simultaneousUploads: 4,
+            singleFile: false
+        };
+        flowFactoryProvider.on('catchAll', function (event) {
+            console.log('catchAll', arguments);
+        })
+    }])
+.config([
+        '$compileProvider',
+        function ($compileProvider) {
+            $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|chrome-extension):/);
+            $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|local|data):/);
+        }
+    ]);

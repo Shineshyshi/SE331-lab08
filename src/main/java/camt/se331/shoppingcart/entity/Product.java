@@ -24,6 +24,20 @@ public class Product implements Comparable {
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     Set<Image> images = new HashSet<>();
 
+    public Product(Long id, String name, String description, Double price) {
+        this.name = name;
+        this.description = description;
+        this.totalPrice = price;
+        this.id = id;
+    }
+
+    public Product(Long id, String name, String description, Double price, Image image) {
+        this.name = name;
+        this.description = description;
+        this.totalPrice = price;
+        this.id = id;
+        this.images.add(image);
+    }
 
     public Set<Image> getImages() {
         return images;
@@ -41,6 +55,9 @@ public class Product implements Comparable {
         this.id = id;
     }
 
+    public Product() {
+
+    }
 
     public Double getNetPrice() {
         return getTotalPrice() * (1 - VatEntity.getInstance().getVat());
@@ -74,23 +91,6 @@ public class Product implements Comparable {
         return result;
     }
 
-    public Product(Long id, String name, String description, Double price, Image image) {
-        this.name = name;
-        this.description = description;
-        this.totalPrice = price;
-        this.id = id;
-        this.images.add(image);
-    }
-
-    public Product(Long id, String name, String description, Double price) {
-        this.name = name;
-        this.description = description;
-        this.totalPrice = price;
-        this.id = id;
-    }
-
-    public Product() {
-    }
 
     public String getName() {
         return name;

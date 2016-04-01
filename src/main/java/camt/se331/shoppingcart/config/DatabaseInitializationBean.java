@@ -27,8 +27,8 @@ public class DatabaseInitializationBean implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         Product[] initProduct =  {
-                new Product(1l,"Kindle","the good book reader",6900.00,ImageUtil.getImage("pic/ss.png")),
-                new Product(2l,"Surface Pro","The unknow computer",34000.00),
+                new Product(1l,"Kindle","the good book reader",6900.00),
+                new Product(2l,"Surface Pro","The unknow computer",34000.00,ImageUtil.getImage("pic/bg.png")),
                 new Product(3l,"Mac pro"," Mac book interim",44000.00),
                 new Product(4l,"Candle","use for lightenup the world",10.00),
                 new Product(5l,"Bin","User for what ?",200.00),

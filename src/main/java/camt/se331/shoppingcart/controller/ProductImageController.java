@@ -27,9 +27,7 @@ public class ProductImageController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
-    public Product addImage(HttpServletRequest request,
-                            HttpServletResponse
-                                    response, @RequestParam("productid") Long productId) {
+    public Product addImage(HttpServletRequest request,HttpServletResponse response, @RequestParam("productid") Long productId) {
         MultipartHttpServletRequest mRequest;
         Product product = productService.getProduct(productId);
         try {
@@ -41,14 +39,13 @@ public class ProductImageController {
                 image.setFileName(multipartFile.getName());
                 image.setContentType(multipartFile.getContentType());
                 image.setContent(multipartFile.getBytes());
-                ;
+
                 image.setCreated(Calendar.getInstance().getTime());
                 productService.addImage(product, image);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
         return product;
     }
