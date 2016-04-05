@@ -39,7 +39,14 @@ public class ProductController {
     }
 
     @RequestMapping(value = "product/{id}",method = RequestMethod.PUT)
-    public  Product edit(@PathVariable("id") Long id,@RequestBody Product product, BindingResult bindingResult){
+    public  Product edit(@PathVariable("id") Long id,
+                         @RequestParam("name") String name,
+                         @RequestParam("description") String description,
+                         @RequestParam("totalPrice") Double totalPrice){
+        Product product = productService.getProduct(id);
+        product.setName(name);
+        product.setDescription(description);
+        product.setTotalPrice(totalPrice);
         return productService.updateProduct(product);
     }
 

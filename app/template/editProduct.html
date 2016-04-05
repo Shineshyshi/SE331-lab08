@@ -45,11 +45,21 @@
                 <div><input type="file" flow-btn>
                     <table>
                         <tr ng-repeat="file in $flow.files">
-                            <td>{{$index+1}}</td>
-                            <td>{{file.name}}</td>
-                            <td><img flow-img="$flow.files[{{$index}}]"></td>
+                            <td>{{$index+1}}<P>{{file.name}}</P>
+                            </td>
+                            <td>
+                                <img flow-img="$flow.files[{{$index}}]" class="myFrame">
+                                <button class="btn btn-danger" ng-click="file.cancel()">cancel</button>
+                            </td>
                         </tr>
                     </table>
+
+                    <div ng-show="editPerson">
+                        <div ng-repeat="image in product.images" class="text-center">
+                            <img ng-src="data:{{image.contentType}};base64,{{image.content}}" id="1" class="myFrame">
+                            <button class="btn btn-danger" ng-click="deleteImage(product.id, image.id)">Remove</button>
+                        </div>
+                    </div>
 
                 </div>
 
@@ -62,7 +72,10 @@
             </div>
 
             <button type="submit" class="btn btn-default" ng-click="addProduct($flow)" ng-show="addPerson">Add</button>
-            <button type="submit" class="btn btn-default" ng-click="editProduct()" ng-show="editPerson">Edit</button>
+            <button type="submit" class="btn btn-default" ng-click="editProduct($flow)" ng-show="editPerson">Edit
+            </button>
+
+
         </form>
     </div>
 </div>

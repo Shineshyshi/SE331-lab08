@@ -10,6 +10,8 @@ import java.awt.image.BufferedImage;
 import java.awt.image.ImagingOpException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 
@@ -27,16 +29,21 @@ public class ImageResize {
      */
     public static void main(String[] args) throws IOException {
         Image img = new Image();
-        img.setFileName("C:/lab/SE331-lab08/src/main/resources/pic/bg.png");
+
+        String resourcePath = "pic/aa.jpg";
+        ClassLoader classLoader = ImageUtil.getInstance().getClass().getClassLoader();
+        File file = new File(classLoader.getResource(resourcePath).getFile());
+        img.setFileName(file.getPath());
+
         File originalImage = new File(img.getFileName());
         //read as buffered image
         BufferedImage image = read(originalImage);
         //resize
         resize(image);
         //write water mark
-        watermark(image);
+        //watermark(image);
         //save
-        write(image, img);
+        write(image, file);
     }
 
     /**
@@ -57,7 +64,7 @@ public class ImageResize {
      * @return the buffered image
      */
     public static void resize(BufferedImage image) {
-        Scalr.resize(image, Method.ULTRA_QUALITY, Scalr.Mode.AUTOMATIC, 150, 100, Scalr.OP_ANTIALIAS);
+        Scalr.resize(image, Method.SPEED, Scalr.Mode.AUTOMATIC, 640, 480);
     }
 
     /**
@@ -69,7 +76,7 @@ public class ImageResize {
     public static void watermark(BufferedImage image) throws IOException {
         Graphics2D graphics2D = (Graphics2D) image.getGraphics();
         graphics2D.setFont(new Font("Arial", Font.BOLD, 200));
-        Color color = Color.black;
+        Color color = Color.red;
         graphics2D.setColor(color);
         graphics2D.drawString("shine!", image.getWidth() / 2, image.getHeight() / 2);
     }
@@ -82,13 +89,19 @@ public class ImageResize {
      * @throws ImagingOpException       the imaging op exception
      * @throws IOException              Signals that an I/O exception has occurred.
      */
-    public static void write(BufferedImage image, Image img) throws IllegalArgumentException, ImagingOpException, IOException {
-        String path = img.getFileName();
-        String[] full = path.split("pic/");
+    public static void write(BufferedImage image, File resourcePath) throws IllegalArgumentException, ImagingOpException, IOException {
+
+        System.out.println(resourcePath);
+
+        String[] full = resourcePath.toString().split("pic\\\\");
         String part1 = full[0];
         String part2 = "modified_" + full[1];
-        String renamed = part1 + "pic/" + part2;
-        ImageIO.write(image, "PNG", new File(renamed));
+        String renamed = part1 + "pic\\" + part2;
+
+        System.out.println(part1);
+        System.out.println(part2);
+        System.out.println(renamed);
+        ImageIO.write(image, "JPG", new File(renamed));
 
     }
 }

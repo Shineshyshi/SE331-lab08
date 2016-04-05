@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -17,11 +18,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Autowired
     ProductDao productDao;
+
     @Override
     public List<Product> getProducts() {
         return productDao.getProducts();
     }
-
 
 
     @Override
@@ -57,4 +58,22 @@ public class ProductServiceImpl implements ProductService {
         productDao.updateProduct(product);
         return product;
     }
+
+    @Override
+    @Transactional
+    public Product deleteImage(Product product, Long id) {
+        //product.getImages().removeAll(product.getImages());
+        Iterator<Image> imageIterator = product.getImages().iterator();
+        while (imageIterator.hasNext()) {
+            Image image = imageIterator.next();
+            //System.out.println("---- ID "+img.getId());
+            if( image.getId().intValue() == id.intValue() ) {
+                product.getImages().remove(image);
+                //System.out.println("---- SIZE " + product.getImages().size());
+            }
+        }
+        productDao.updateProduct(product);
+        return product;
+    }
+
 }
